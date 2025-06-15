@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Ana Renkler */
+  --deep-navy: #0A192F;
+  --slate-dark: #1E293B;  /* Yeni renk: Koyu mor yerine modern slate */
+  
+  /* Vurgu Renkleri */
+  --electric-blue: #00C2CB;
+  --neon-green: #6EE7B7;
+  --ultra-magenta: #B026FF;
+  
+  /* Nötr Renkler */
+  --light-gray: #E0E0E0;
+  --off-white: #F0F0F0;
+}
+
+@layer base {
+  body {
+    @apply bg-[#0A192F] text-[#E0E0E0];
+    font-family: 'Inter', sans-serif;
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(0, 194, 203, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(110, 231, 183, 0.05) 0%, transparent 50%),
+      linear-gradient(to bottom, rgba(10, 25, 47, 0.95), rgba(30, 41, 59, 0.95));
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply bg-[#00C2CB] text-white px-6 py-3 rounded-lg font-semibold 
+           hover:bg-opacity-90 transition-all duration-300 
+           focus:outline-none focus:ring-2 focus:ring-[#00C2CB] focus:ring-opacity-50
+           hover:shadow-[0_0_15px_rgba(0,194,203,0.5)]
+           shadow-[0_0_10px_rgba(0,194,203,0.3)];
+  }
+
+  .btn-secondary {
+    @apply bg-[#6EE7B7] text-[#0A192F] px-6 py-3 rounded-lg font-semibold 
+           hover:bg-opacity-90 transition-all duration-300 
+           focus:outline-none focus:ring-2 focus:ring-[#6EE7B7] focus:ring-opacity-50
+           hover:shadow-[0_0_15px_rgba(110,231,183,0.5)]
+           shadow-[0_0_10px_rgba(110,231,183,0.3)];
+  }
+
+  .card {
+    @apply bg-[#1E293B] rounded-xl p-6 
+           hover:shadow-xl transition-all duration-300
+           border border-transparent hover:border-[#00C2CB]/20
+           relative overflow-hidden
+           shadow-[0_4px_20px_rgba(0,0,0,0.1)]
+           hover:shadow-[0_8px_30px_rgba(0,194,203,0.1)];
+  }
+
+  .card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-[#00C2CB]/5 to-[#6EE7B7]/5 opacity-0
+           transition-opacity duration-300;
+  }
+
+  .card:hover::before {
+    @apply opacity-100 pointer-events-none;
+  }
+
+  .input-field {
+    @apply bg-[#0A192F] border border-[#00C2CB] rounded-lg px-4 py-2 
+           focus:outline-none focus:ring-2 focus:ring-[#00C2CB] focus:ring-opacity-50
+           text-[#E0E0E0] placeholder-[#E0E0E0]/50
+           transition-all duration-300;
+  }
+
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-[#00C2CB] to-[#6EE7B7];
+  }
+
+  .nav-link {
+    @apply text-[#E0E0E0] hover:text-[#00C2CB] transition-colors duration-300
+           relative after:absolute after:bottom-0 after:left-0 after:w-0
+           after:h-0.5 after:bg-[#00C2CB] after:transition-all after:duration-300
+           hover:after:w-full;
+  }
+
+  .nav-link.active {
+    @apply text-[#00C2CB] after:w-full;
+  }
+
+  .btn-secondary-link {
+    @apply bg-[#6EE7B7] text-[#0A192F] px-4 py-2 rounded-lg font-semibold
+           hover:bg-opacity-90 transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-[#6EE7B7] focus:ring-opacity-50
+           shadow-[0_0_10px_rgba(110,231,183,0.3)] hover:shadow-[0_0_15px_rgba(110,231,183,0.5)];
+  }
+
+  .feature-list-item {
+    @apply flex items-start space-x-2 text-[#C0C0C0];
+  }
+
+  .feature-list-item::before {
+    content: '•';
+    @apply text-[#00C2CB] text-lg;
+  }
+
+  .logo-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-b from-[#00C2CB] to-[#6EE7B7]
+           font-bold text-2xl;
+  }
+}
+
+/* Animasyonlar */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(0, 194, 203, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(0, 194, 203, 0.4); }
+  100% { box-shadow: 0 0 5px rgba(0, 194, 203, 0.2); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-in-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-400 {
+  animation-delay: 400ms;
+}
+
+/* Özel Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--deep-navy);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--electric-blue);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-green);
+}
+
+/* Arka Plan Partikül Efekti */
+.particle-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.1;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(0, 194, 203, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(110, 231, 183, 0.1) 0%, transparent 50%);
+  animation: particleFloat 20s ease-in-out infinite;
+}
+
+/* Geometrik Desen */
+.geometric-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.02;
+  background-image: 
+    linear-gradient(45deg, var(--electric-blue) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--electric-blue) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--electric-blue) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--electric-blue) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
