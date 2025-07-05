@@ -3,21 +3,34 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert('Şifreler eşleşmiyor!');
       return;
     }
-    console.log('Register attempt:', { name, email, password });
-    // Kayıt işlemi burada yapılacak
+    const response = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    if (response.ok) {
+      router.push('/auth/login'); // Kayıt başarılı olduğunda giriş sayfasına yönlendir
+    } else {
+      alert('Kayıt işlemi başarısız oldu.');
+    }
   };
 
   return (

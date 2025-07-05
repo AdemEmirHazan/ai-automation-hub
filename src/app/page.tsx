@@ -104,16 +104,16 @@ export default function Home() {
           {/* Parçacık efekti */}
           <div className="absolute inset-0">
             <div className="particles-container">
-              {[...Array(50)].map((_, i) => (
+              {Array.from({ length: 50 }).map((_, i) => (
                 <div
                   key={i}
-                  className="particle"
                   style={{
-                    '--x': `${Math.random() * 100}%`,
-                    '--y': `${Math.random() * 100}%`,
-                    '--duration': `${Math.random() * 20 + 10}s`,
-                    '--delay': `${Math.random() * 5}s`,
-                  } as any}
+                    '--x': `${(i * 2) % 100}%`,
+                    '--y': `${(i * 3) % 100}%`,
+                    '--duration': `${20 + (i % 10)}s`,
+                    '--delay': `${(i * 0.1) % 5}s`,
+                  } as React.CSSProperties}
+                  className="particle"
                 />
               ))}
             </div>
